@@ -47,7 +47,7 @@ dbRef.on("child_added", function(childSnapshot, prevChildKey) {
   
 
 
-  const firstTimeConverted = moment(newTrain.first, "hh:mm").subtract(1, "years");
+  const firstTimeConverted = moment(newTrain.first, "hh:mm").subtract(1, "days");
   console.log(firstTimeConverted);
 
 
@@ -66,9 +66,17 @@ dbRef.on("child_added", function(childSnapshot, prevChildKey) {
   newTrain.mAway = newTrain.freq - tRemainder;
   console.log("MINUTES TILL TRAIN: " + newTrain.mAway);
 
+  newTrain.mAway = moment.unix(newTrain.mAway).format("mm")
+
 
   newTrain.next = moment().add(newTrain.mAway, "minutes");
   console.log("ARRIVAL TIME: " + moment(newTrain.next).format("hh:mm"));
+
+  newTrain.next = moment.unix(newTrain.next).format("HH:mm")
+
+  newTrain.freq = moment.unix(newTrain.freq).format("mm")
+
+
 
   $("tbody").append(createTrainRow(newTrain));
 });
