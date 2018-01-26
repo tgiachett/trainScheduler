@@ -22,7 +22,7 @@ $("#addTrain").click(function(event) {
     name: $("#tName").val().trim(),
     dest: $("#tDest").val().trim(),
     first: moment($("#tFirst").val().trim(), "HH:mm").format("X"),
-    frequency: moment($("#tFreq").val().trim(), "mm").format("X"),
+    freq: moment($("#tFreq").val().trim(), "mm").format("X"),
     
   };
 
@@ -47,7 +47,7 @@ dbRef.on("child_added", function(childSnapshot, prevChildKey) {
   
 
 
-  const firstTimeConverted = moment(first, "hh:mm").subtract(1, "years");
+  const firstTimeConverted = moment(newTrain.first, "hh:mm").subtract(1, "years");
   console.log(firstTimeConverted);
 
 
@@ -59,16 +59,16 @@ dbRef.on("child_added", function(childSnapshot, prevChildKey) {
   console.log("DIFFERENCE IN TIME: " + diffTime);
 
 
-  var tRemainder = diffTime % frequency;
+  var tRemainder = diffTime % newTrain.freq;
   console.log(tRemainder);
 
 
-  newTrain.mAway = frequency - tRemainder;
-  console.log("MINUTES TILL TRAIN: " + newtrain.mAway);
+  newTrain.mAway = newTrain.freq - tRemainder;
+  console.log("MINUTES TILL TRAIN: " + newTrain.mAway);
 
 
-  newTrain.next = moment().add(train.mAway, "minutes");
-  console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+  newTrain.next = moment().add(newTrain.mAway, "minutes");
+  console.log("ARRIVAL TIME: " + moment(newTrain.next).format("hh:mm"));
 
   $("tbody").append(createTrainRow(newTrain));
 });
