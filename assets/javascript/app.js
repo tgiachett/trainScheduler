@@ -1,6 +1,6 @@
 // Initialize Firebase
   const config = {
-    apiKey: "AIzaSyDHGTecMhelo67czMg1uyTeTRFsdrrwmtk",
+    apiKey: "",
     authDomain: "trainscheduler-c1119.firebaseapp.com",
     databaseURL: "https://trainscheduler-c1119.firebaseio.com",
     projectId: "trainscheduler-c1119",
