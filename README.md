@@ -1,3 +1,3 @@
 # trainScheduler
 
-Bootcamp Excercise
+Bootcamp Exercise
